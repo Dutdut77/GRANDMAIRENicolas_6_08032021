@@ -1,12 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauces');
 const app = express();
+const path = require('path');
+const helmet = require('helmet');
+const Ddos = require('ddos');
+var ddos = new Ddos({burst:10, limit:15})
 
 
-mongoose.connect('mongodb+srv://Nicolas:azerty@cluster0.b2nbe.mongodb.net/sopekocko?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -14,6 +18,7 @@ mongoose.connect('mongodb+srv://Nicolas:azerty@cluster0.b2nbe.mongodb.net/sopeko
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch((err) => console.log(err));
 
+app.use(ddos.express);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,9 +27,9 @@ app.use((req, res, next) => {
     next();
 });
 
-
-app.use(bodyParser.json());
-
+app.use(helmet());
+app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', saucesRoutes);
 
