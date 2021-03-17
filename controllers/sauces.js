@@ -10,8 +10,8 @@ exports.addSauce = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     likes: "0",
     dislikes: "0",
-    usersLiked: `[]`,
-    usersDisliked: `[]`
+    usersLiked: [`test`],
+    usersDisliked: [`test`]
   });
 
   sauce.save()
@@ -50,33 +50,42 @@ exports.deleteSauce = (req, res, next) => {
 exports.likeSauce = (req, res, next) => {
   const like = req.body.like;
   const userId = req.body.userId;
-
-
   Sauces.findOne({ _id: req.params.id })
     .then(sauce => {
-
-
-      //&& sauce.usersLiked.includes(userId) == false
-      if (like === 1) {
-          const newLike = sauce.likes += 1;
-          //const newUsersLiked = sauce.usersLiked.push(userId);
-
-          Sauces.updateOne({ _id: req.params.id }, {
-          likes: newLike,
-          //usersLiked: newUsersLiked,
-          _id: req.params.id
-        })
-          .then(() => res.status(200).json(console.log(req.body)))
-          .catch(error => res.status(400).json({ error }));
-
+      if (like === 1 && sauce.usersLiked.includes(userId) == false) {
+        sauce.likes += 1;
+        sauce.usersLiked.push(userId);
+      }
+      if (like === -1 && sauce.usersDisliked.includes(userId) == false) {
+        sauce.dislikes += 1;
+        sauce.usersDisliked.push(userId);
+      }
+      if (like === 0 && sauce.usersLiked.includes(userId) == true) {
+        sauce.likes -= 1;
+        const index = sauce.usersLiked.indexOf(userId);
+        if (index > -1) {
+          sauce.usersLiked.splice(index, 1);
+        }
+      }
+      if (like === 0 && sauce.usersDisliked.includes(userId) == true) {
+        sauce.dislikes -= 1;
+        const index = sauce.usersDisliked.indexOf(userId);
+        if (index > -1) {
+          sauce.usersDisliked.splice(index, 1);
+        }
       }
 
-
-    res.status(200).json({ message: 'Attention' })
+      Sauces.updateOne({ _id: req.params.id }, {
+        likes: sauce.likes,
+        dislikes: sauce.dislikes,
+        usersLiked: sauce.usersLiked,
+        usersDisliked: sauce.usersDisliked,
+        _id: req.params.id
+      })
+        .then(() => res.status(200).json({ message: 'Like mis à jour !' }))
+        .catch(error => res.status(400).json({ error }));
 
     })
     .catch(error => res.status(404).json({ error }));
-
-
 
 };
