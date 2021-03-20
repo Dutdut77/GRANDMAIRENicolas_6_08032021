@@ -1,5 +1,16 @@
 const User = require('../models/user');
 
+
+/**
+ * Cache l'adresse Email
+ *
+ * @param   {String}  req.body.email   Email de l'utilisateur.
+ * 
+ *
+ * 
+ * @return  {String}      Adresse Email masquée
+ * 
+ */
 module.exports = (req, res, next) => {
     const email = req.body.email;
     let code;
@@ -21,4 +32,3 @@ module.exports = (req, res, next) => {
     req.body.email = newMail;
     next();
 }
-   

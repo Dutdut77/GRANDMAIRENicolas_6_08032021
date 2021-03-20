@@ -1,5 +1,12 @@
 const jwt = require('jsonwebtoken');
 
+/**
+ * Vérifie l'autorisation de l'utilisateur
+ *
+ * @param   {String}  req.headers.authorization   Bearer + numéro du Token
+ * @param   {String}  req.body.userId   userId de l'utilisateur
+ *
+ */
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
