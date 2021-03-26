@@ -1,177 +1,121 @@
-# Markown-memento
-Voici un petit fichier memento pour vous indiquer les principales syntaxes que vous pouvez utiliser en markdown.
-Pour voir les détails de la syntaxe, cliquez que l'icone d'édition de ce fichier.
+# Introduction
+
+So Peckoko est une entreprise familiale qui a comme activité principale, la création de sauces piquantes dont la composition est tenue secrète.
+
+Cette documentation décrit comment utiliser l'API [So Peckoco](http://localhost:4200/). Nous espérons que vous apprécierez ce document, et n'hésitez pas à nous [signaler un problème] (https://github.com/Dutdut77/GRANDMAIRENicolas_6_08032021/issues/new) si vous faites face à un disfonctionnement.
+
+
+
+## Autorisation
+
+Pour accéder aux différentes "routes" de l'API, vous devez fournir une clé valide dans le header "Authorization". Cette clé vous est fourni par l'API en vous logant au site [So Peckoco](http://localhost:4200/). Cette clé reste valide pendant 24h. 
+
+
+## Routes
+
+```http
+POST /api/sauces/
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `userId` | `string` | **Required**. Identifiant unique |
+| `name` | `string` | **Required**. Nom de la sauce |
+| `manufacturer` | `string` | **Required**. Fabriquant de la sauce |
+| `description` | `string` | **Required**. Description de la sauce |
+| `mainPepper` | `string` | **Required**. Principal ingrédient de la sauce |
+| `filename` | `string` | **Required**. Nom de la photo |
+| `heat` | `Number` | **Required**. Force de la sauce |
+
 
 ----------------
 
-####Mettre un mot en italique
-
-Voici un mot *en italique* 
-
-Votre mot se trouve entre astérisques `*mon-mot*`
-
------------------
-
-####Mettre un mot en gras
-
-Voici un mot __en gras__ ! 
-
-Votre mot se trouve entre deux `__underscores__` 
-
------------------
-
-####Les titres
-
-# Titre de niveau 1 
-Pour un titre de niveau 1 (h1), il faut placer un `#titre` devant votre titre.
-
-## Titre de niveau 2
-Pour un titre de niveau 2 (h2), il faut cette fois deux `##titre` devant votre titre
-
-Et ainsi de suite jusqu'au h6.
-
------------------
-
-####Aller à la ligne en fin de phrase
-
-Pour faire un  
-changement de ligne
-
-Votre ligne doit se terminer par 2 `espaces` pour faire ce qu'on appelle un __retour-chariot__, c'est à dire aller à la ligne.
-
------------------
-
-####Faire une liste à puces
-
-* Une puce
-* Une autre puce
-* Et encore une autre puce !
-
-Il faut simplement placer un astérisque devant les éléments de votre liste.
-
-`* Une puce`
-
-`* Une autre puce`
-
-`* Et encore une autre puce !`
-
-######Pour faire une liste ordonnée : 
-
-1. Et de un
-2. Et de deux
-3. Et de trois
-
-`1. Et de un`
-`2. Et de deux`
-`3. Et de trois`
-
-######Pour imbriquer une liste dans une autre :
-
-* Une puce
-* Une autre puce
-    * Une sous-puce
-    * Une autre sous-puce
-* Et encore une autre puce !
-
-`* Une puce`
-
-`* Une autre puce`
-
-    `* Une sous-puce`
-    
-    `* Une autre sous-puce`
-    
-`* Et encore une autre puce !`
-
-1. Une puce
-2. Une autre puce
-    1. Une sous-puce
-    2. Une autre sous-puce
-3. Et encore une autre puce !
-
-`1. Une puce`
-
-`2. Une autre puce`
-
-    `1. Une sous-puce`
-    
-    `2. Une autre sous-puce`
-    
-`3. Et encore une autre puce !`
-
------------------
-
-####Faire une citation
-
-> Ceci est un texte cité. Vous pouvez répondre
-> à cette citation en écrivant un paragraphe
-> normal juste en-dessous !
-
-Il vous suffit d'ajouter un `>` devant votre citation.
-
-`> Ceci est un texte cité. Vous pouvez répondre à cette citation en écrivant un paragraphe normal juste en-dessous !`
-
------------------
-
-####Ecrire du code
-
-#####Un code entier
-
-Voici un code en C :
-
-    int main()
-    {
-        printf("Hello world!\n");
-        return 0;
-    }
-    
-Il vous suffit d'écrire votre phrase de présentation comme n'importe quelle phrase et d'écrire votre code à la ligne.
-    
-`Voici un code en C :`
-
-    int main()
-    {
-        printf("Hello world!\n");
-        return 0;
-    }
-
-#####Juste un morceau de code
-
-`<h1>Titre</h1>`
-
-Il vous suffit d'entourer votre morceau de code avec deux accents graves.
-Pour faire un accent grave, il vous suffit de faire `AltGr` + `7` sur votre clavier.
-
------------------
-
-####Mettre un lien
-
-Rendez-vous sur [Simplonline](http://www.simplonline.com) !
-
-Il vous faut le mot sur lequel vous souhaitez faire votre lien entre crochets [ ], puis votre lien entre parenthèses ( ).
-
-`Rendez-vous sur [Simplonline](http://www.simplonline.com) !`
-
------------------
-
-####Intégrer une image
-
-La syntaxe est la même que pour un lien, il suffit juste d'ajouter un point d'exclamation devant les crochets. 
-
-Ce que vous mettez entre crochet est le texte alternatif de l'image, que nous vous conseillons fortement d'intégrer à chaque fois que vous mettez une image.
-
-Important : ça ne marche qu'avec des url d'images prises sur le web.
-
-`![Simplon.co](http://simplon.co/wp-content/uploads/2015/04/if-coder-keep-coding-else-learn-with-simplon-2-600x675.png)`
-
-![Simplon.co](http://simplon.co/wp-content/uploads/2015/04/if-coder-keep-coding-else-learn-with-simplon-2-600x675.png)
-
------------------
-
-####Barre de séparation
-
-Pour faire une barre de séparation il vous suffit d'écrire plusieurs `-` d'affilé. Plus vous en mettrez plus le trait sera épais.
-
-`-----------------`
+```http
+GET /api/sauces/
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `/` | `/` | Retourne la liste des sauces au format **JSON** |
 
 ----------------
+
+```http
+GET /api/sauces/:id
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `:id` | `String` | Retourne la sauce demandée au format **JSON** |
+
+
+----------------
+
+```http
+PUT /api/sauces/:id
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `name` | `string` | **Required**. Nom de la sauce |
+| `manufacturer` | `string` | **Required**. Fabriquant de la sauce |
+| `description` | `string` | **Required**. Description de la sauce |
+| `mainPepper` | `string` | **Required**. Principal ingrédient de la sauce |
+| `filename` | `string` | **Required**. Nom de la photo |
+| `heat` | `Number` | **Required**. Force de la sauce |
+
+
+----------------
+
+```http
+DELETE /api/sauces/:id
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `:id` | `String` | Supprime de la base de donnée la sauce demandée **:id** |
+
+
+
+----------------
+
+```http
+POST /api/sauces/:id/like
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `likes` | `Number` | **Required**. 1 / 0 / -1 |
+| `userId` | `string` | **Required**. Identifiant unique |
+
+
+## Responses
+
+Many API endpoints return the JSON representation of the resources created or edited. However, if an invalid request is submitted, or some other error occurs, Gophish returns a JSON response in the following format:
+
+```javascript
+{
+  "message" : string,
+  "success" : bool,
+  "data"    : string
+}
+```
+
+The `message` attribute contains a message commonly used to indicate errors or, in the case of deleting a resource, success that the resource was properly deleted.
+
+The `success` attribute describes if the transaction was successful or not.
+
+The `data` attribute contains any other metadata associated with the response. This will be an escaped string containing JSON data.
+
+## Status Codes
+
+Gophish returns the following status codes in its API:
+
+| Status Code | Description |
+| :--- | :--- |
+| 200 | `OK` |
+| 201 | `CREATED` |
+| 400 | `BAD REQUEST` |
+| 404 | `NOT FOUND` |
+| 500 | `INTERNAL SERVER ERROR` |
+
