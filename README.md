@@ -2,7 +2,7 @@
 
 So Peckoko est une entreprise familiale qui a comme activité principale, la création de sauces piquantes dont la composition est tenue secrète.
 
-Cette documentation décrit comment utiliser l'API [So Peckoco](http://localhost:4200/). Nous espérons que vous apprécierez ce document, et n'hésitez pas à nous [signaler un problème] (https://github.com/Dutdut77/GRANDMAIRENicolas_6_08032021/issues/new) si vous faites face à un disfonctionnement.
+Cette documentation décrit comment utiliser l'API [So Peckoco](http://localhost:4200/). Nous espérons que vous apprécierez ce document, et n'hésitez pas à nous [signaler un problème](https://github.com/Dutdut77/GRANDMAIRENicolas_6_08032021/issues/new) si vous faites face à un disfonctionnement.
 
 
 
@@ -89,15 +89,29 @@ POST /api/sauces/:id/like
 | `userId` | `string` | **Required**. Identifiant unique |
 
 
-## Responses
+## Réponses
 
-Many API endpoints return the JSON representation of the resources created or edited. However, if an invalid request is submitted, or some other error occurs, Gophish returns a JSON response in the following format:
+Voici un exemple au format JSON que retourne l'API. 
 
 ```javascript
 {
-  "message" : string,
-  "success" : bool,
-  "data"    : string
+    "usersLiked": [
+        "/"
+    ],
+    "usersDisliked": [
+        "/"
+    ],
+    "_id": "605a576b12001e395001233f",
+    "name": "Moutarde",
+    "manufacturer": "Amora",
+    "description": "fuyg",
+    "mainPepper": "uyguy",
+    "heat": 3,
+    "userId": "604fbdf275f31b17108cc11b",
+    "imageUrl": "http://localhost:3000/images/Sketchpad.png1616533355736.png",
+    "likes": 0,
+    "dislikes": 0,
+    "__v": 0
 }
 ```
 
@@ -109,7 +123,8 @@ The `data` attribute contains any other metadata associated with the response. T
 
 ## Status Codes
 
-Gophish returns the following status codes in its API:
+So Peckoko renvoie les codes d'état suivants dans son API:
+
 
 | Status Code | Description |
 | :--- | :--- |
