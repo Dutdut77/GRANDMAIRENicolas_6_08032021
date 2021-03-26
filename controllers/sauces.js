@@ -13,18 +13,23 @@ const Sauces = require('../models/sauces');
  * @param   {Number}  req.body.heat   Force de la sauce
  * 
  *
+ * 
+ * @returns {void}
+ * 
  */
 exports.addSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
-  delete sauceObject._id;
+  delete sauceObject._id; 
   const sauce = new Sauces({
     ...sauceObject,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     likes: "0",
     dislikes: "0",
-    usersLiked: [`test`],
-    usersDisliked: [`test`]
-  });
+    usersLiked: [`First`],
+    usersDisliked: [`First`]
+   
+  })
+  ;
 
   sauce.save()
     .then(() => res.status(201).json({ message: 'Sauce enregistré !' }))
@@ -67,7 +72,7 @@ exports.getOneSauce = (req, res, next) => {
  * @param   {Object}  req.body   Tous les champs du formulaire
  * 
  *
- * @return  {JSON}        JSON de la sauce modifiée
+ * @returns {void}
  */
 exports.updateSauce = (req, res, next) => {
   Sauces.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
@@ -80,13 +85,16 @@ exports.updateSauce = (req, res, next) => {
  *
  * @param   {String}  req.params.id   Id de la sauce
  * 
- *
+ * @returns {void}
  */
 exports.deleteSauce = (req, res, next) => {
-  Sauces.deleteOne({ _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
-    .catch(error => res.status(400).json({ error }));
-};
+      Sauces.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
+        .catch(error => res.status(400).json({ error }));
+
+    };
+
+
 
 /**
  * Like / Dislike une sauce
@@ -95,29 +103,29 @@ exports.deleteSauce = (req, res, next) => {
  * @param   {Number}  req.body.like   1 / 0 / -1 
  * @param   {String}  req.body.userId  userId de l'utlisateur
  *
- * @return  {JSON}        Mise à jour de la base de donnée.
+ * @returns {void}
  */
 exports.likeSauce = (req, res, next) => {
   const like = req.body.like;
   const userId = req.body.userId;
   Sauces.findOne({ _id: req.params.id })
     .then(sauce => {
-      if (like === 1 && sauce.usersLiked.includes(userId) == false) {
+      if (like === 1 && !sauce.usersLiked.includes(userId)) {
         sauce.likes += 1;
         sauce.usersLiked.push(userId);
       }
-      if (like === -1 && sauce.usersDisliked.includes(userId) == false) {
+      if (like === -1 && !sauce.usersDisliked.includes(userId)) {
         sauce.dislikes += 1;
         sauce.usersDisliked.push(userId);
       }
-      if (like === 0 && sauce.usersLiked.includes(userId) == true) {
+      if (like === 0 && sauce.usersLiked.includes(userId)) {
         sauce.likes -= 1;
         const index = sauce.usersLiked.indexOf(userId);
         if (index > -1) {
           sauce.usersLiked.splice(index, 1);
         }
       }
-      if (like === 0 && sauce.usersDisliked.includes(userId) == true) {
+      if (like === 0 && sauce.usersDisliked.includes(userId)) {
         sauce.dislikes -= 1;
         const index = sauce.usersDisliked.indexOf(userId);
         if (index > -1) {
