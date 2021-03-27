@@ -1,14 +1,14 @@
 # Introduction
 
-So Peckoko est une entreprise familiale qui a comme activité principale, la création de sauces piquantes dont la composition est tenue secrète.
+So Pekocko est une entreprise familiale qui a comme activité principale, la création de sauces piquantes dont la composition est tenue secrète.
 
-Cette documentation décrit comment utiliser l'API [So Peckoco](http://localhost:4200/). Nous espérons que vous apprécierez ce document, et n'hésitez pas à nous [signaler un problème](https://github.com/Dutdut77/GRANDMAIRENicolas_6_08032021/issues/new) si vous faites face à un disfonctionnement.
+Cette documentation décrit comment utiliser l'API [So Pekocko](http://localhost:4200/). Nous espérons que vous apprécierez ce document, et n'hésitez pas à nous [signaler un problème](https://github.com/Dutdut77/GRANDMAIRENicolas_6_08032021/issues/new) si vous faites face à un disfonctionnement.
 
 
 
 ## Autorisation
 
-Pour accéder aux différentes "routes" de l'API, vous devez fournir une clé valide dans le header "Authorization". Cette clé vous est fourni par l'API en vous logant au site [So Peckoco](http://localhost:4200/). Cette clé reste valide pendant 24h. 
+Pour accéder aux différentes "routes" de l'API, vous devez fournir une clé valide dans le header "Authorization". Cette clé vous est fourni par l'API en vous logant au site [So Pekocko](http://localhost:4200/). Cette clé reste valide pendant 24h. 
 
 
 ## Routes
