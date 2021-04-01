@@ -6,7 +6,7 @@ const app = express();
 const path = require('path');
 const helmet = require('helmet');
 const Ddos = require('ddos');
-var ddos = new Ddos({burst:10, limit:15})
+var ddos = new Ddos({ burst: 10, limit: 15 })
 
 
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}?retryWrites=true&w=majority`,

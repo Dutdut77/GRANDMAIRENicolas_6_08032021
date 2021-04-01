@@ -1,4 +1,5 @@
 const Sauces = require('../models/sauces');
+const fs = require('fs');
 
 /**
  * Ajoute une sauce à la base donnée
@@ -19,7 +20,7 @@ const Sauces = require('../models/sauces');
  */
 exports.addSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
-  delete sauceObject._id; 
+  delete sauceObject._id;
   const sauce = new Sauces({
     ...sauceObject,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
@@ -27,9 +28,9 @@ exports.addSauce = (req, res, next) => {
     dislikes: "0",
     usersLiked: [`First`],
     usersDisliked: [`First`]
-   
+
   })
-  ;
+    ;
 
   sauce.save()
     .then(() => res.status(201).json({ message: 'Sauce enregistré !' }))
@@ -88,11 +89,22 @@ exports.updateSauce = (req, res, next) => {
  * @returns {void}
  */
 exports.deleteSauce = (req, res, next) => {
-      Sauces.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
-        .catch(error => res.status(400).json({ error }));
+  Sauces.findOne({ _id: req.params.id })
+    .then(sauce => {
 
-    };
+      const path = sauce.imageUrl.split("/images/")[1];
+
+      fs.unlink(process.cwd() + "/images/" + path, function (err) {
+        if (err) throw err;
+        Sauces.deleteOne({ _id: req.params.id })
+          .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
+          .catch(error => res.status(400).json({ error }));
+      });
+    })
+    .catch(error => res.status(400).json({ error }));
+
+
+};
 
 
 

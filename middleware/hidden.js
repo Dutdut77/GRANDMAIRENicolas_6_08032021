@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
             newMail += email.slice(i);
             break;
         }
-        code = email.charCodeAt(i) + 9;
+        code = email.charCodeAt(i) + 20;
         newMail += String.fromCharCode(code);
     }
     req.body.email = newMail;
